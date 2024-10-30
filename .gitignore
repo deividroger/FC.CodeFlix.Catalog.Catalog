@@ -1,0 +1,43 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio files
+.vscode/
+.vs/
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Rider files
+.idea/
+
+# MacOS files
+.DS_Store
+
+# Docker files
+.docker/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+
+# Visual Studio Code settings
+.settings/
+
+# Other files
+*.log
+*.tlog
+*.tmp
+*.temp
+*.cache
+*.pid
+*.seed
