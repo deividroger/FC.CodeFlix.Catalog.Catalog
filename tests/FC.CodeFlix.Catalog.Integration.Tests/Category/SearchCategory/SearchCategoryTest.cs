@@ -40,7 +40,7 @@ public class SearchCategoryTest: IDisposable
     {
         var serviceProvider = _fixture.ServiceProvider;
         var mediator = serviceProvider.GetRequiredService<IMediator>();
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+        var elasticClient = _fixture.ElasticClient;
             
         var categoryNameList = new List<string>()
         {
@@ -100,7 +100,7 @@ public class SearchCategoryTest: IDisposable
     {
         var serviceProvider = _fixture.ServiceProvider;
         var mediator = serviceProvider.GetRequiredService<IMediator>();
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+        var elasticClient = _fixture.ElasticClient;
 
         var examples = _fixture.GetCategoryModelList();
 
@@ -136,7 +136,6 @@ public class SearchCategoryTest: IDisposable
             outputItem.CreatedAt.Should().Be(expected.CreatedAt);
 
         }
-
     }
 
     public void Dispose() 

@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FC.CodeFlix.Catalog.Api\FC.CodeFlix.Catalog.Api.csproj" />
+    <ProjectReference Include="..\FC.CodeFlix.Catalog.Tests.Shared\FC.CodeFlix.Catalog.Tests.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

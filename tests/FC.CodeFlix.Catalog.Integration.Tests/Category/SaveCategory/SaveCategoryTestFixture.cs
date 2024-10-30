@@ -6,10 +6,20 @@ namespace FC.CodeFlix.Catalog.Integration.Tests.Category.SaveCategory;
 public class SaveCategoryTestFixture: CategoryTestFixure
 {
     public SaveCategoryInput GetValidInput()
-        => new SaveCategoryInput(Guid.NewGuid(), GetValidCategoryName(), GetValidCategoryDescription(), DateTime.Now, GetRandomBoolean());
+        => new SaveCategoryInput(
+            Guid.NewGuid(), 
+            DataGenerator.GetValidCategoryName(),
+            DataGenerator.GetValidCategoryDescription(), 
+            DateTime.Now, 
+            DataGenerator.GetRandomBoolean());
 
     public SaveCategoryInput GetInValidInput()
-        => new SaveCategoryInput(Guid.NewGuid(), null, GetValidCategoryDescription(), DateTime.Now, GetRandomBoolean());
+        => new SaveCategoryInput(
+            Guid.NewGuid(), 
+            null, 
+            DataGenerator.GetValidCategoryDescription(),
+            DateTime.Now, 
+            DataGenerator.GetRandomBoolean());
 }
 
 [CollectionDefinition(nameof(SaveCategoryTestFixture))]

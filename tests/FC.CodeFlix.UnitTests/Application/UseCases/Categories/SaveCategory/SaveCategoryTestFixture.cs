@@ -1,16 +1,25 @@
 ﻿using FC.CodeFlix.Catalog.Application.UseCases.Category.SaveCategory;
-using FC.CodeFlix.UnitTests.Application.UseCases.Categories.Common;
+using FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.Common;
 
-namespace FC.CodeFlix.UnitTests.Application.UseCases.Categories.SaveCategory;
+namespace FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.SaveCategory;
 
-public class SaveCategoryTestFixture: CategoryUseCaseFixture
+public class SaveCategoryTestFixture : CategoryUseCaseFixture
 {
     public SaveCategoryInput GetValidInput()
-        => new SaveCategoryInput(Guid.NewGuid(), GetValidName(), GetValidDescription(), DateTime.Now, GetRandomBoolean());
+        => new SaveCategoryInput(
+            Guid.NewGuid(), 
+            DataGenerator.GetValidCategoryName(), 
+            DataGenerator.GetValidCategoryDescription(), 
+            DateTime.Now, DataGenerator.GetRandomBoolean());
 
     public SaveCategoryInput GetInValidInput()
-        => new SaveCategoryInput(Guid.NewGuid(), null, GetValidDescription(), DateTime.Now, GetRandomBoolean());
+        => new SaveCategoryInput(
+            Guid.NewGuid(),
+            null, 
+            DataGenerator.GetValidCategoryDescription(),
+            DateTime.Now, 
+            DataGenerator.GetRandomBoolean());
 }
 
 [CollectionDefinition(nameof(SaveCategoryTestFixture))]
-public class SaveCategoryTestFixtureCollection: ICollectionFixture<SaveCategoryTestFixture> { }
+public class SaveCategoryTestFixtureCollection : ICollectionFixture<SaveCategoryTestFixture> { }

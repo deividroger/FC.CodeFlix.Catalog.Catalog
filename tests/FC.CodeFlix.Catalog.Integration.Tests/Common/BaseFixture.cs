@@ -13,7 +13,6 @@ public abstract class BaseFixture
 
     protected BaseFixture()
     {
-        Faker = new Faker("en");
         ServiceProvider = BuildServiceProvider();
     }
 
@@ -22,7 +21,7 @@ public abstract class BaseFixture
         var services = new ServiceCollection();
         var inMemorySerttings = new Dictionary<string, string>()
         {
-            {"ConnectionStrings:ElasticSearch","http://localhost:9200" }
+            {"ConnectionStrings:ElasticSearch","http://localhost:9201" }
         };
 
         IConfiguration configuration = new ConfigurationBuilder()
@@ -36,8 +35,4 @@ public abstract class BaseFixture
         return services.BuildServiceProvider();
     }
 
-    public Faker Faker { get; set; }
-
-    public bool GetRandomBoolean()
-        => new Random().NextDouble() < 0.5;
 }

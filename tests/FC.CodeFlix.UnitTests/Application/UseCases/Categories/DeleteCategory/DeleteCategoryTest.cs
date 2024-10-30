@@ -1,9 +1,9 @@
 ﻿using FC.CodeFlix.Catalog.Application.UseCases.Category.DeleteCategory;
-using FC.CodeFlix.UnitTests.Application.UseCases.Categories.Common;
+using FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.Common;
 using NSubstitute;
 using UseCase = FC.CodeFlix.Catalog.Application.UseCases.Category.DeleteCategory;
 
-namespace FC.CodeFlix.UnitTests.Application.UseCases.Categories.DeleteCategory;
+namespace FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.DeleteCategory;
 
 [Collection(nameof(CategoryUseCaseFixture))]
 public class DeleteCategoryTest
@@ -25,8 +25,8 @@ public class DeleteCategoryTest
 
         var input = new DeleteCategoryInput(Guid.NewGuid());
 
-        await useCase.Handle(input,CancellationToken.None);
+        await useCase.Handle(input, CancellationToken.None);
 
-        await repository.Received(1).DeleteAsync(input.Id,Arg.Any<CancellationToken>());
+        await repository.Received(1).DeleteAsync(input.Id, Arg.Any<CancellationToken>());
     }
 }

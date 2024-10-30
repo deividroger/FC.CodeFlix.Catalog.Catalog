@@ -1,8 +1,6 @@
-﻿using Elasticsearch.Net;
-using FC.Codeflix.Catalog.E2ETests;
+﻿using FC.Codeflix.Catalog.E2ETests;
 using FC.CodeFlix.Catalog.E2ETests.Base;
-using FC.CodeFlix.Catalog.Infra.ES;
-using FC.CodeFlix.Catalog.Infra.ES.Models;
+using FC.CodeFlix.Catalog.Tests.Shared;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
@@ -13,10 +11,16 @@ public class CategoryTestFixture : IDisposable
 {
     public CustomerWebApplicationFactory<Program> WebAppFactory { get; private set; } = null!;
 
-    public CatalogClient GraphQLClient { get; private set; } = null!;
+    public CatalogClient GraphQLClient { get;  }
+
+    public IElasticClient ElasticClient { get; private set; }
+
+    public CategoryDataGenerator DataGenerator { get; private set; }
 
     public CategoryTestFixture()
     {
+        DataGenerator = new CategoryDataGenerator();
+
         WebAppFactory = new CustomerWebApplicationFactory<Program>();
 
         _ = WebAppFactory.CreateClient(new WebApplicationFactoryClientOptions
@@ -24,57 +28,17 @@ public class CategoryTestFixture : IDisposable
             BaseAddress = new Uri(WebAppFactory.BaseUrl)
         });
 
+        ElasticClient = WebAppFactory.Services.GetRequiredService<IElasticClient>();
+
         GraphQLClient = WebAppFactory.Services.GetRequiredService<CatalogClient>();
-        CreateCategoryIndexAsync().GetAwaiter().GetResult();
-    }
-
-    private async Task CreateCategoryIndexAsync()
-    {
-        var esClient = WebAppFactory.Services.GetRequiredService<IElasticClient>();
-
-        var response = await esClient.Indices.CreateAsync(ElasticsearchIndices.Category, c => c
-            .Map<CategoryModel>(m => m
-                .Properties(ps => ps
-                    .Keyword(t => t
-                        .Name(category => category.Id)
-                    )
-                    .Text(t => t
-                        .Name(category => category.Name)
-                        .Fields(fs => fs
-                            .Keyword(k => k
-                                .Name(category => category.Name.Suffix("keyword")))
-                        )
-                    )
-                    .Text(t => t
-                        .Name(category => category.Description)
-                    )
-                    .Boolean(b => b
-                        .Name(category => category.IsActive)
-                    )
-                    .Date(d => d
-                        .Name(category => category.CreatedAt)
-                    )
-                )
-            )
-        );
+        ElasticSearchOperations.CreateCategoryIndexAsync(ElasticClient).GetAwaiter().GetResult();
     }
 
     public void DeleteAll()
-    {
-        var elasticClient = WebAppFactory.Services.GetRequiredService<IElasticClient>();
-        elasticClient.DeleteByQuery<CategoryModel>(del =>
-            del.Query(
-                q => q.QueryString(qs => qs.Query("*"))
-            ).Conflicts(Conflicts.Proceed)
-        );
-    }
+        => ElasticSearchOperations.DeleteCategoryDocuments(ElasticClient);
 
     public void Dispose()
-    {
-        var elasticClient = WebAppFactory.Services.GetRequiredService<IElasticClient>();
-
-        elasticClient.Indices.Delete(ElasticsearchIndices.Category);
-    }
+        => ElasticSearchOperations.DeleteCategoryIndex(ElasticClient);
 }
 
 [CollectionDefinition(nameof(CategoryTestFixture))]

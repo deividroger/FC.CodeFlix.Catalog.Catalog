@@ -1,42 +1,18 @@
-﻿using Bogus;
-using FC.CodeFlix.Catalog.UnitTests.Common;
+﻿using FC.CodeFlix.Catalog.Tests.Shared;
 using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 namespace FC.CodeFlix.Catalog.UnitTests.Domain.Entity.Category;
 
-public class CategoryTestFixure : BaseFixture
+public class CategoryTestFixure
 {
-    public CategoryTestFixure() : base()
-    {
 
-    }
+    public CategoryDataGenerator DataGenerator { get; }    
 
-    public string GetValidCategoryName()
-    {
-        var categoryName = "";
+    public CategoryTestFixure() 
+        => DataGenerator = new CategoryDataGenerator();
 
-        while (categoryName.Length < 3)
-            categoryName = Faker.Commerce.Categories(1)[0];
-
-        if (categoryName.Length > 255)
-            categoryName = categoryName[..255];
-
-        return categoryName;
-    }
-
-    public string GetValidCategoryDescription()
-    {
-        var categoryDescription = Faker.Commerce.ProductDescription();
-
-
-        if (categoryDescription.Length > 10_000)
-            categoryDescription = categoryDescription[..10_000];
-
-
-        return categoryDescription;
-    }
 
     public DomainEntity.Category GetValidCategory()
-        => new(Guid.NewGuid(), GetValidCategoryName(), GetValidCategoryDescription(),DateTime.Now,GetRandomBoolean());
+        => DataGenerator.GetValidCategory();
 }
 
 [CollectionDefinition(nameof(CategoryTestFixure))]

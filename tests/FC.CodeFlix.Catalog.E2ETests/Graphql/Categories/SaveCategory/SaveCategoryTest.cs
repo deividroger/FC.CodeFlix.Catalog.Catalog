@@ -1,18 +1,14 @@
-﻿using FC.Codeflix.Catalog.E2ETests;
-using FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.Common;
-using FC.CodeFlix.Catalog.Infra.ES.Models;
+﻿using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
-using Nest;
 
 namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.SaveCategory;
 
-[Collection(nameof(CategoryTestFixture))]
+[Collection(nameof(SaveCategoryTestFixture))]
 public class SaveCategoryTest : IDisposable
 {
-    private readonly CategoryTestFixture _fixture;
+    private readonly SaveCategoryTestFixture _fixture;
 
-    public SaveCategoryTest(CategoryTestFixture fixture)
+    public SaveCategoryTest(SaveCategoryTestFixture fixture)
     {
         _fixture = fixture;
     }
@@ -23,21 +19,14 @@ public class SaveCategoryTest : IDisposable
     {
         var serviceProvider = _fixture.WebAppFactory.Services;
         
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+        var elasticClient = _fixture.ElasticClient;
 
-        var input = new SaveCategoryInput() { 
-                Id = Guid.NewGuid(), 
-                Name="Action",
-                Description = "Action Test", 
-                CreatedAt = DateTime.UtcNow.Date, 
-                IsActive =true 
-        };
+        var input = _fixture.GetValidInput();
 
         var output = await _fixture.GraphQLClient.SaveCategory
             .ExecuteAsync(input,CancellationToken.None);
 
         var persisted = await elasticClient.GetAsync<CategoryModel>(input.Id);
-
 
         persisted.Found.Should().BeTrue();
 
@@ -66,19 +55,12 @@ public class SaveCategoryTest : IDisposable
     public async Task SaveCategory_When_InputIsInValid_ThrowsException()
     {
         var serviceProvider = _fixture.WebAppFactory.Services ;
-        
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+
+        var elasticClient = _fixture.ElasticClient;
 
         var expectedMessage = "Name should not be empty or null";
 
-        var input = new SaveCategoryInput()
-        {
-            Id = Guid.NewGuid(),
-            Name =string.Empty,
-            Description = "Action Test",
-            CreatedAt = DateTime.UtcNow.Date,
-            IsActive = true
-        };
+        var input = _fixture.GetInValidInput();
 
         var output = await _fixture.GraphQLClient.SaveCategory
             .ExecuteAsync(input, CancellationToken.None);

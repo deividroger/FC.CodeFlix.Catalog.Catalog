@@ -1,23 +1,23 @@
 ﻿using FC.CodeFlix.Catalog.Domain.Repositories;
-using FC.CodeFlix.Catalog.UnitTests.Common;
+using FC.CodeFlix.Catalog.Tests.Shared;
 using NSubstitute;
 using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 
-namespace FC.CodeFlix.UnitTests.Application.UseCases.Categories.Common;
+namespace FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.Common;
 
-public class CategoryUseCaseFixture: BaseFixture
+public class CategoryUseCaseFixture 
 {
-    public ICategoryRepository GetMockRepository() 
+    public CategoryDataGenerator DataGenerator { get;  }
+
+    public CategoryUseCaseFixture()
+        => DataGenerator = new CategoryDataGenerator();
+
+
+    public ICategoryRepository GetMockRepository()
         => Substitute.For<ICategoryRepository>();
 
-    public string GetValidName()
-        => Faker.Commerce.Categories(1)[0];
-
-    public string GetValidDescription()
-        => Faker.Commerce.ProductDescription();
-
     public DomainEntity.Category GetValidCategory()
-        => new(Guid.NewGuid(), GetValidName(), GetValidDescription(), DateTime.Now, GetRandomBoolean());
+        => DataGenerator.GetValidCategory();
 
 }
 

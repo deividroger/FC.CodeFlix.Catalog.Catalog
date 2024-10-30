@@ -3,7 +3,6 @@ using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Nest;
 
 namespace FC.CodeFlix.Catalog.Integration.Tests.Category.SaveCategory;
 
@@ -23,7 +22,7 @@ public class SaveCategoryTest: IDisposable
     {
         var serviceProvider = _fixture.ServiceProvider;
         var mediator = serviceProvider.GetRequiredService<IMediator>();
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+        var elasticClient = _fixture.ElasticClient;
 
         var input = _fixture.GetValidInput();
 
@@ -58,7 +57,7 @@ public class SaveCategoryTest: IDisposable
     {
         var serviceProvider = _fixture.ServiceProvider;
         var mediator = serviceProvider.GetRequiredService<IMediator>();
-        var elasticClient = serviceProvider.GetRequiredService<IElasticClient>();
+        var elasticClient = _fixture.ElasticClient;
 
         var expectedMessage = "Name should not be empty or null";
 

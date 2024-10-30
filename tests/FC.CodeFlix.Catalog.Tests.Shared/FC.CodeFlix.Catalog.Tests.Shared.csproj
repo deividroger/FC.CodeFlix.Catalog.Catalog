@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FC.CodeFlix.Catalog.Application\FC.CodeFlix.Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\src\FC.CodeFlix.Catalog.Infra.ES\FC.CodeFlix.Catalog.Infra.ES.csproj" />
+  </ItemGroup>
+
+</Project>

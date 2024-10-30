@@ -4,7 +4,7 @@ using NSubstitute;
 using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 using UseCase = FC.CodeFlix.Catalog.Application.UseCases.Category.SearchCategory;
 
-namespace FC.CodeFlix.UnitTests.Application.UseCases.Categories.SearchCategory;
+namespace FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.SearchCategory;
 
 [Collection(nameof(SearchCategoryTestFixture))]
 public class SearchCategoryTest
@@ -16,8 +16,8 @@ public class SearchCategoryTest
         _fixture = fixture;
     }
 
-    [Fact(DisplayName =nameof(ReturnsSearchResult))]
-    [Trait("Application","[UseCase] SearchCategory")]
+    [Fact(DisplayName = nameof(ReturnsSearchResult))]
+    [Trait("Application", "[UseCase] SearchCategory")]
     public async Task ReturnsSearchResult()
     {
         var repository = _fixture.GetMockRepository();
@@ -27,10 +27,10 @@ public class SearchCategoryTest
         var input = _fixture.GetSearchInput();
 
         var expectedQueryResult = new SearchOutput<DomainEntity.Category>(
-           input.Page,input.PerPage,input.PerPage,categories);
+           input.Page, input.PerPage, input.PerPage, categories);
 
         repository.SearchAsync(Arg.Any<SearchInput>(), Arg.Any<CancellationToken>())
-            .Returns(Task.FromResult( expectedQueryResult));
+            .Returns(Task.FromResult(expectedQueryResult));
 
         var useCase = new UseCase.SearchCategory(repository);
 
@@ -46,12 +46,12 @@ public class SearchCategoryTest
         output.Items.Should().BeEquivalentTo(categories);
 
         await repository.Received(1).SearchAsync(
-            Arg.Is<SearchInput>(search=>
+            Arg.Is<SearchInput>(search =>
             search.Page == input.Page &&
             search.Search == input.Search &&
             search.PerPage == input.PerPage &&
             search.Order == input.Order &&
-            search.OrderBy == input.OrderBy), 
+            search.OrderBy == input.OrderBy),
             Arg.Any<CancellationToken>());
     }
 

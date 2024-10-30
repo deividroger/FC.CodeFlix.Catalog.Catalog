@@ -1,10 +1,9 @@
-﻿
-using FC.CodeFlix.Catalog.Domain.Exceptions;
+﻿using FC.CodeFlix.Catalog.Domain.Exceptions;
 using FluentAssertions;
 using NSubstitute;
 using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 using UseCase = FC.CodeFlix.Catalog.Application.UseCases.Category.SaveCategory;
-namespace FC.CodeFlix.UnitTests.Application.UseCases.Categories.SaveCategory;
+namespace FC.CodeFlix.Catalog.UnitTests.Application.UseCases.Categories.SaveCategory;
 
 
 [Collection(nameof(SaveCategoryTestFixture))]
@@ -17,7 +16,7 @@ public class SaveCategoryTest
         _fixture = fixture;
     }
 
-    [Fact(DisplayName =nameof(SaveValidCategory))]
+    [Fact(DisplayName = nameof(SaveValidCategory))]
     [Trait("Application", "[UseCase] SaveCategory")]
     public async Task SaveValidCategory()
     {
@@ -27,7 +26,7 @@ public class SaveCategoryTest
 
         var input = _fixture.GetValidInput();
 
-        var output = await useCase.Handle(input,CancellationToken.None);
+        var output = await useCase.Handle(input, CancellationToken.None);
 
         await repository.Received(1).SaveAsync(
             Arg.Any<DomainEntity.Category>(), Arg.Any<CancellationToken>());
@@ -50,10 +49,10 @@ public class SaveCategoryTest
 
         var input = _fixture.GetInValidInput();
 
-        var action  = async () => await useCase.Handle(input, CancellationToken.None);
+        var action = async () => await useCase.Handle(input, CancellationToken.None);
 
-       await repository.DidNotReceive().SaveAsync(
-            Arg.Any<DomainEntity.Category>(), Arg.Any<CancellationToken>());
+        await repository.DidNotReceive().SaveAsync(
+             Arg.Any<DomainEntity.Category>(), Arg.Any<CancellationToken>());
 
         await action.Should().ThrowAsync<EntityValidationException>().WithMessage("Name should not be empty or null");
     }
