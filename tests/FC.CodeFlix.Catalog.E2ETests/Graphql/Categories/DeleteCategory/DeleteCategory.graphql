@@ -1,0 +1,3 @@
+﻿mutation deleteCategory ($id: UUID!){
+	deleteCategory(id:$id)
+}

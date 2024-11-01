@@ -14,7 +14,7 @@ public class CategoriesMutations
         return CategoryPayload.FromCategoryModelOutput(output);
     }
 
-    public async Task<bool> DeleteCategoryAync(Guid id, [Service] IMediator mediator,CancellationToken cancellationToken)
+    public async Task<bool> DeleteCategoryAsync(Guid id, [Service] IMediator mediator,CancellationToken cancellationToken)
     {
         await mediator.Send(new DeleteCategoryInput(id), cancellationToken);
 

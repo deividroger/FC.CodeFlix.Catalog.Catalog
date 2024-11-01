@@ -1,4 +1,5 @@
-﻿using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
+﻿using FC.CodeFlix.Catalog.Infra.ES.Models;
+using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 
 namespace FC.CodeFlix.Catalog.Tests.Shared;
 
@@ -33,6 +34,15 @@ public class CategoryDataGenerator: DataGeneratorBase
 
         return categoryDescription;
     }
+
+    public IList<CategoryModel> GetCategoryModelList(int count = 10)
+        => Enumerable.Range(0, count)
+                        .Select(_ =>
+                        {
+                            Task.Delay(5).GetAwaiter().GetResult();
+                            return CategoryModel.FromEntity(GetValidCategory());
+                        })
+                        .ToList();
 
     public DomainEntity.Category GetValidCategory()
         => new(Guid.NewGuid(), GetValidCategoryName(), GetValidCategoryDescription(), DateTime.Now, GetRandomBoolean());

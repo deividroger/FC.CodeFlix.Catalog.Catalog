@@ -9,7 +9,7 @@ type Query {
 
 type Mutation {
   saveCategory(input: SaveCategoryInput!): CategoryPayload!
-  deleteCategoryAync(id: UUID!): Boolean!
+  deleteCategory(id: UUID!): Boolean!
 }
 
 type SearchCategoryPayload {

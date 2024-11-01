@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <GraphQL Remove="Graphql\Categories\DeleteCategory\DeleteCategory.graphql" />
     <GraphQL Remove="Graphql\Categories\SaveCategory\SaveCategory.graphql" />
   </ItemGroup>
 
