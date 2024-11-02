@@ -1,13 +1,13 @@
 ﻿using FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
+using FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.Common;
 using FC.CodeFlix.Catalog.Infra.ES.Models;
-using FC.CodeFlix.Catalog.Integration.Tests.Category.Common;
 
-namespace FC.CodeFlix.Catalog.Integration.Tests.Category.SearchCategory;
+namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.SearchCategory;
 
-public class SearchCategoryTestFixture: CategoryTestFixure
+public class SearchCategoryTestFixture: CategoryTestFixture
 {
     public IList<CategoryModel> GetCategoryModelList(List<string> categoriesName)
-        => DataGenerator.GetCategoryModelList(categoriesName);
+    => DataGenerator.GetCategoryModelList(categoriesName);
 
     public IList<CategoryModel> CloneCategoriesListOrdered(
         IList<CategoryModel> categoriesList,
@@ -17,4 +17,5 @@ public class SearchCategoryTestFixture: CategoryTestFixure
 }
 
 [CollectionDefinition(nameof(SearchCategoryTestFixture))]
-public class SearchCategoryTestFixtureCollection : ICollectionFixture<SearchCategoryTestFixture> { }
+public class SearchCategoryTestFixtureCollection : ICollectionFixture<SearchCategoryTestFixture>
+{ }

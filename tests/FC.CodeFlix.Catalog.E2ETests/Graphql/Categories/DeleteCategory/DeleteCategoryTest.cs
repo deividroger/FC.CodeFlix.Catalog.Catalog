@@ -14,11 +14,10 @@ public class DeleteCategoryTest:IDisposable
         => _fixture = categoryTestFixture;
 
     [Fact(DisplayName = nameof(DeleteCategoryWhenReceivesAndExistingId_DeletesCategory))]
-    [Trait("E2E/GraphQL", "[Category] Save")]
+    [Trait("E2E/GraphQL", "[Category] Delete")]
     public async Task DeleteCategoryWhenReceivesAndExistingId_DeletesCategory()
     {
         var serviceProvider = _fixture.WebAppFactory.Services;
-
 
         var elasticClient = _fixture.ElasticClient;
 
@@ -33,7 +32,6 @@ public class DeleteCategoryTest:IDisposable
             .DeleteCategory
             .ExecuteAsync(id,CancellationToken.None);
 
-
         output.Data.Should().NotBeNull();
         output.Data!.DeleteCategory.Should().BeTrue();
        
@@ -44,7 +42,7 @@ public class DeleteCategoryTest:IDisposable
     }
 
     [Fact(DisplayName = nameof(DeleteCategoryWhenReceivesAndNonExistingId_ReturnsErrors))]
-    [Trait("E2E/GraphQL", "[Category] Save")]
+    [Trait("E2E/GraphQL", "[Category] Delete")]
     public async Task DeleteCategoryWhenReceivesAndNonExistingId_ReturnsErrors()
     {   
         var elasticClient = _fixture.ElasticClient;
@@ -66,8 +64,6 @@ public class DeleteCategoryTest:IDisposable
 
         output.Errors.Single().Message.Should().Be(expectedErrorMessage);
     }
-
-
 
     public void Dispose()
         => _fixture.DeleteAll();
