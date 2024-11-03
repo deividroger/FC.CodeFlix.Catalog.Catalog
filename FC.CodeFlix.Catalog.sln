@@ -24,14 +24,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Integra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Api", "src\FC.CodeFlix.Catalog.Api\FC.CodeFlix.Catalog.Api.csproj", "{01735107-A2B7-4DDB-B3B1-3261D080EFC8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "env", "env", "{D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}"
-	ProjectSection(SolutionItems) = preProject
-		category_index.json = category_index.json
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sandbox", "sandbox", "{D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.E2ETests", "tests\FC.CodeFlix.Catalog.E2ETests\FC.CodeFlix.Catalog.E2ETests.csproj", "{F4264667-B5F0-401D-A6D2-AEAAA75C9455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Tests.Shared", "tests\FC.CodeFlix.Catalog.Tests.Shared\FC.CodeFlix.Catalog.Tests.Shared.csproj", "{40613700-6B32-4198-BC3E-1E658C0420A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Tests.Shared", "tests\FC.CodeFlix.Catalog.Tests.Shared\FC.CodeFlix.Catalog.Tests.Shared.csproj", "{40613700-6B32-4198-BC3E-1E658C0420A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elk", "elk", "{E9F303A7-B677-4F28-A0BD-98AB81786A33}"
+	ProjectSection(SolutionItems) = preProject
+		sandbox\elk\category_index.json = sandbox\elk\category_index.json
+		sandbox\elk\docker-compose.yaml = sandbox\elk\docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kafka", "kafka", "{1759CA98-A2E0-4393-AA93-EA20DF611628}"
+	ProjectSection(SolutionItems) = preProject
+		sandbox\kafka\docker-compose.yaml = sandbox\kafka\docker-compose.yaml
+		sandbox\kafka\sandboxkafkaKafka Connect.postman_collection.json = sandbox\kafka\sandboxkafkaKafka Connect.postman_collection.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Infra.Messaging", "src\FC.CodeFlix.Catalog.Infra.Messaging\FC.CodeFlix.Catalog.Infra.Messaging.csproj", "{700971AD-6485-4349-8C42-122DBA1E7195}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +82,10 @@ Global
 		{40613700-6B32-4198-BC3E-1E658C0420A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40613700-6B32-4198-BC3E-1E658C0420A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40613700-6B32-4198-BC3E-1E658C0420A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{700971AD-6485-4349-8C42-122DBA1E7195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700971AD-6485-4349-8C42-122DBA1E7195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700971AD-6485-4349-8C42-122DBA1E7195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700971AD-6485-4349-8C42-122DBA1E7195}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +99,9 @@ Global
 		{01735107-A2B7-4DDB-B3B1-3261D080EFC8} = {61A00092-8D64-4828-B2BD-281A844F903A}
 		{F4264667-B5F0-401D-A6D2-AEAAA75C9455} = {79772D4D-92D3-43CA-9B6A-E5E211B0A1A6}
 		{40613700-6B32-4198-BC3E-1E658C0420A4} = {79772D4D-92D3-43CA-9B6A-E5E211B0A1A6}
+		{E9F303A7-B677-4F28-A0BD-98AB81786A33} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
+		{1759CA98-A2E0-4393-AA93-EA20DF611628} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
+		{700971AD-6485-4349-8C42-122DBA1E7195} = {61A00092-8D64-4828-B2BD-281A844F903A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11473A29-FF48-433F-BA75-9496B6067232}
