@@ -6,9 +6,9 @@ namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.SaveCategory;
 
 public class SaveCategoryTestFixture : CategoryTestFixture
 {
-    public SaveCategoryTestFixture():base()
+    public SaveCategoryTestFixture() : base()
     {
-        
+
     }
 
     public SaveCategoryInput GetValidInput()

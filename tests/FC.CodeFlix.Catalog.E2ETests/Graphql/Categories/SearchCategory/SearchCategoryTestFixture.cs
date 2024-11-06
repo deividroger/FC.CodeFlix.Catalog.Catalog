@@ -4,7 +4,7 @@ using FC.CodeFlix.Catalog.Infra.ES.Models;
 
 namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.SearchCategory;
 
-public class SearchCategoryTestFixture: CategoryTestFixture
+public class SearchCategoryTestFixture : CategoryTestFixture
 {
     public IList<CategoryModel> GetCategoryModelList(List<string> categoriesName)
     => DataGenerator.GetCategoryModelList(categoriesName);

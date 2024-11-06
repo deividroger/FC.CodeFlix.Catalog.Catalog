@@ -18,13 +18,13 @@ public class SaveCategoryTest : IDisposable
     public async Task SaveCategory_When_InputIsValid_Persists_Category()
     {
         var serviceProvider = _fixture.WebAppFactory.Services;
-        
+
         var elasticClient = _fixture.ElasticClient;
 
         var input = _fixture.GetValidInput();
 
         var output = await _fixture.GraphQLClient.SaveCategory
-            .ExecuteAsync(input,CancellationToken.None);
+            .ExecuteAsync(input, CancellationToken.None);
 
         var persisted = await elasticClient.GetAsync<CategoryModel>(input.Id);
 
@@ -40,7 +40,7 @@ public class SaveCategoryTest : IDisposable
         document.CreatedAt.Should().Be(input.CreatedAt.DateTime);
 
         output.Data!.SaveCategory.Should().NotBeNull();
-            
+
         output.Data.SaveCategory.Id.Should().Be(input.Id);
         output.Data.SaveCategory.Name.Should().Be(input.Name);
         output.Data.SaveCategory.Description.Should().Be(input.Description);
@@ -54,7 +54,7 @@ public class SaveCategoryTest : IDisposable
     [Trait("E2E/GraphQL", "[Category] Save")]
     public async Task SaveCategory_When_InputIsInValid_ThrowsException()
     {
-        var serviceProvider = _fixture.WebAppFactory.Services ;
+        var serviceProvider = _fixture.WebAppFactory.Services;
 
         var elasticClient = _fixture.ElasticClient;
 

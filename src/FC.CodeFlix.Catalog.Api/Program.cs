@@ -2,6 +2,7 @@ using FC.CodeFlix.Catalog.Api.Categories;
 using FC.CodeFlix.Catalog.Api.Filters;
 using FC.CodeFlix.Catalog.Application;
 using FC.CodeFlix.Catalog.Infra.ES;
+using FC.CodeFlix.Catalog.Infra.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddUseCases()
+                .AddConsumers()
                 .AddElasticSearch(builder.Configuration)
                 .AddRepositories();
 

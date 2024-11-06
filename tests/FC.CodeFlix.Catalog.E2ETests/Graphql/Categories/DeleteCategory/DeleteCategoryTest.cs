@@ -6,7 +6,7 @@ using Nest;
 namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.DeleteCategory;
 
 [Collection(nameof(CategoryTestFixture))]
-public class DeleteCategoryTest:IDisposable
+public class DeleteCategoryTest : IDisposable
 {
     private readonly CategoryTestFixture _fixture;
 
@@ -25,26 +25,26 @@ public class DeleteCategoryTest:IDisposable
 
         await elasticClient.IndexManyAsync(categoriesExample);
 
-        var id =  categoriesExample[3].Id;
+        var id = categoriesExample[3].Id;
 
         var output = await _fixture
             .GraphQLClient
             .DeleteCategory
-            .ExecuteAsync(id,CancellationToken.None);
+            .ExecuteAsync(id, CancellationToken.None);
 
         output.Data.Should().NotBeNull();
         output.Data!.DeleteCategory.Should().BeTrue();
-       
 
-       var deletedCategory = await elasticClient.GetAsync<CategoryModel>(id);
 
-       deletedCategory.Found.Should().BeFalse();
+        var deletedCategory = await elasticClient.GetAsync<CategoryModel>(id);
+
+        deletedCategory.Found.Should().BeFalse();
     }
 
     [Fact(DisplayName = nameof(DeleteCategoryWhenReceivesAndNonExistingId_ReturnsErrors))]
     [Trait("E2E/GraphQL", "[Category] Delete")]
     public async Task DeleteCategoryWhenReceivesAndNonExistingId_ReturnsErrors()
-    {   
+    {
         var elasticClient = _fixture.ElasticClient;
 
         var categoriesExample = _fixture.GetCategoryModelList();
@@ -57,7 +57,7 @@ public class DeleteCategoryTest:IDisposable
         var output = await _fixture.GraphQLClient
             .DeleteCategory
             .ExecuteAsync(id, CancellationToken.None);
-        
+
         output.Data.Should().BeNull();
 
         output.Errors.Should().NotBeNull();

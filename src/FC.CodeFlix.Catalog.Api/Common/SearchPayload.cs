@@ -9,5 +9,5 @@ public abstract class SearchPayload<TPayload>
 
     public int Total { get; set; }
 
-    public IReadOnlyList<TPayload> Items { get; set; }
+    public IReadOnlyList<TPayload> Items { get; set; } = null!;
 }
