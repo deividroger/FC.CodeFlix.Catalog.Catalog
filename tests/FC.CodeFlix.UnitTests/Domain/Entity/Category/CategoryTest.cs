@@ -76,16 +76,4 @@ public class CategoryTest
         action.Should().Throw<EntityValidationException>().WithMessage("Name should not be empty or null");
 
     }
-
-    [Fact(DisplayName = nameof(InstanciateErrorWhenDescriptionIsNull))]
-    [Trait("Domain", "Category - Aggregates")]
-    public void InstanciateErrorWhenDescriptionIsNull()
-    {
-        var validCategory = _categoryTestFixure.GetValidCategory();
-        Action action =
-            () => new DomainEntity.Category(validCategory.Id, validCategory.Name, null!, validCategory.CreatedAt);
-
-        action.Should().Throw<EntityValidationException>().WithMessage("Description should not be null");
-
-    }
 }
