@@ -5,6 +5,12 @@ namespace FC.CodeFlix.Catalog.Integration.Tests.Category.SaveCategory;
 
 public class SaveCategoryTestFixture: CategoryTestFixure
 {
+
+    public SaveCategoryTestFixture():base()
+    {
+        
+    }
+
     public SaveCategoryInput GetValidInput()
         => new SaveCategoryInput(
             Guid.NewGuid(), 

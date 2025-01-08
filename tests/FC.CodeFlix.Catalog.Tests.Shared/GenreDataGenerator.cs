@@ -1,11 +1,53 @@
 ﻿using Bogus;
+using FC.CodeFlix.Catalog.Application.UseCases.Genre.SaveGenre;
 using FC.CodeFlix.Catalog.Domain.Entity;
+using FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
+using FC.CodeFlix.Catalog.Infra.ES.Models;
 
 namespace FC.CodeFlix.Catalog.Tests.Shared;
 
 public class GenreDataGenerator: DataGeneratorBase
 {
     private readonly CategoryDataGenerator _categoryDataGenerator = new();
+
+    public IList<GenreModel> GetGenreModelList(int count = 10)
+     => Enumerable.Range(0, count)
+                     .Select(_ =>
+                     {
+                         Task.Delay(5).GetAwaiter().GetResult();
+                         return GenreModel.FromEntity(GetValidGenre());
+                     })
+                     .ToList();
+
+    public IList<GenreModel> GetGenreModelList(List<string> genreNames)
+    => genreNames.Select(name =>
+    {
+        Task.Delay(5).GetAwaiter().GetResult();
+        var genre = GenreModel.FromEntity(GetValidGenre());
+        genre.Name = name;
+        return genre;
+    }).ToList();
+
+    public IList<GenreModel> CloneGenreListOrdered(
+    IList<GenreModel> genresList,
+    string orderBy,
+    SearchOrder direction)
+    {
+        var listClone = new List<GenreModel>(genresList);
+        var orderedEnumerable = (orderBy.ToLower(), direction) switch
+        {
+            ("name", SearchOrder.ASC) => listClone.OrderBy(x => x.Name)
+                .ThenBy(x => x.Id),
+            ("name", SearchOrder.DESC) => listClone.OrderByDescending(x => x.Name)
+                .ThenByDescending(x => x.Id),
+            ("id", SearchOrder.ASC) => listClone.OrderBy(x => x.Id),
+            ("id", SearchOrder.DESC) => listClone.OrderByDescending(x => x.Id),
+            ("createdat", SearchOrder.ASC) => listClone.OrderBy(x => x.CreatedAt),
+            ("createdat", SearchOrder.DESC) => listClone.OrderByDescending(x => x.CreatedAt),
+            _ => listClone.OrderBy(x => x.Name).ThenBy(x => x.Id),
+        };
+        return orderedEnumerable.ToList();
+    }
 
     public string GetValidName()
         => Faker.Commerce.Categories(1)[0];
@@ -26,4 +68,25 @@ public class GenreDataGenerator: DataGeneratorBase
 
         return genre;
     }
+
+    public SaveGenreInput GetValidSaveGenreInput()
+    {
+        var genre = GetValidGenre();
+        return new(genre.Id,
+                   genre.Name,
+                   genre.IsActive,
+                   genre.CreatedAt,
+                   genre.Categories.Select(item => new SaveGenreInputCategory(item.Id, item.Name)));
+    }
+
+    public SaveGenreInput GetInvalidSaveGenreInput()
+    {
+        var genre = GetValidGenre();
+        return new(genre.Id,
+                   null!,
+                   genre.IsActive,
+                   genre.CreatedAt,
+                   genre.Categories.Select(item => new SaveGenreInputCategory(item.Id, item.Name)));
+    }
+
 }
