@@ -38,7 +38,7 @@ public class SearchGenreUseCaseTest
         });
 
         var expectedQueryResult = new SearchOutput<DomainEntity.Genre>(
-           input.Page, input.PerPage, input.PerPage, genres);
+           input.Page, input.PerPage, input.PerPage, genres.AsReadOnly());
 
         repository.SearchAsync(Arg.Any<SearchInput>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(expectedQueryResult));

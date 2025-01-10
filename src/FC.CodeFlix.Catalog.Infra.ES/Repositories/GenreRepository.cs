@@ -4,6 +4,7 @@ using FC.CodeFlix.Catalog.Domain.Repositories;
 using FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
 using FC.CodeFlix.Catalog.Infra.ES.Models;
 using Nest;
+using System.Reflection.Metadata.Ecma335;
 using SearchInput = FC.CodeFlix.Catalog.Domain.Repositories.DTOs.SearchInput;
 
 namespace FC.CodeFlix.Catalog.Infra.ES.Repositories;
@@ -55,6 +56,23 @@ public class GenreRepository : IGenreRepository
         return new SearchOutput<Genre>(input.Page, input.PerPage, (int)response.Total, genres);
     }
 
+    public async Task<IEnumerable<Genre>> GetGenresByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+    {
+        var response = await _elasticClient.SearchAsync<GenreModel>(s => s
+            .Query(q => q
+              .Bool(b => b
+                .Filter(f => f
+                    //.Terms(t => t
+                    //    .Field(genre => genre.Id)
+                    //    .Terms(ids)
+                    //) JUST IN CASE...
+                    .Ids(i=> i.Values(ids))
+                )
+                )),cancellationToken);
+
+        return response.Documents.Select(doc => doc.ToEntity()).ToList();
+    }
+
     private static Func<SortDescriptor<GenreModel>, IPromise<IList<ISort>>> BuildSortExpression(string orderBy, SearchOrder order)
     => (orderBy.ToLower(), order)
         switch
@@ -80,4 +98,6 @@ public class GenreRepository : IGenreRepository
              .Ascending(f => f.Name.Suffix("keyword"))
              .Ascending(f => f.Id)
     };
+
+
 }

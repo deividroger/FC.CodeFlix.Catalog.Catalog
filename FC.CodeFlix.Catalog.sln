@@ -13,11 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.UnitTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Application", "src\FC.CodeFlix.Catalog.Application\FC.CodeFlix.Catalog.Application.csproj", "{EB3D0120-8C3C-46AA-BD06-7BD8B17ACD2D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D905B132-ACCE-484D-8C10-BE265FD01933}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yaml = docker-compose.yaml
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Infra.ES", "src\FC.CodeFlix.Catalog.Infra.ES\FC.CodeFlix.Catalog.Infra.ES.csproj", "{69288CC9-CBE2-4D54-BA5C-0AA75CF10F06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Integration.Tests", "tests\FC.CodeFlix.Catalog.Integration.Tests\FC.CodeFlix.Catalog.Integration.Tests.csproj", "{CEE6E2AB-96B5-4E39-9939-97B618F0CA79}"

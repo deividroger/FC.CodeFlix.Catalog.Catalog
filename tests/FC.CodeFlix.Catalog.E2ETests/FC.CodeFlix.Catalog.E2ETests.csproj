@@ -13,6 +13,8 @@
     <GraphQL Remove="Graphql\Categories\DeleteCategory\DeleteCategory.graphql" />
     <GraphQL Remove="Graphql\Categories\SaveCategory\SaveCategory.graphql" />
     <GraphQL Remove="Graphql\Categories\SearchCategory\SearchCategory.graphql" />
+    <GraphQL Remove="Graphql\Genres\GetGenresByIds\GetGenresByIds.graphql" />
+    <GraphQL Remove="graphql\genres\searchgenre\SearchGenre.graphql" />
   </ItemGroup>
 
   <ItemGroup>

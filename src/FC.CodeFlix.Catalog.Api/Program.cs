@@ -1,5 +1,6 @@
 using FC.CodeFlix.Catalog.Api.Categories;
 using FC.CodeFlix.Catalog.Api.Filters;
+using FC.CodeFlix.Catalog.Api.Genres;
 using FC.CodeFlix.Catalog.Application;
 using FC.CodeFlix.Catalog.Infra.ES;
 using FC.CodeFlix.Catalog.Infra.Messaging;
@@ -22,6 +23,7 @@ builder.Services.AddGraphQLServer()
                 .AddQueryType()
                 .AddMutationType()
                 .AddTypeExtension<CategoryQueries>()
+                .AddTypeExtension<GenreQueries>()
                 .AddTypeExtension<CategoriesMutations>()
                 .AddErrorFilter<GraphQLErrorFilter>();
                 

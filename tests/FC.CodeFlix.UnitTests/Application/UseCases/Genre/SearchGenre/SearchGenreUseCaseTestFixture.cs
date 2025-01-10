@@ -19,12 +19,7 @@ public class SearchGenreUseCaseTestFixture: GenreUseCaseTestFixture
             );
     }
 
-    public List<DomainEntity.Genre> GetGenreList(int length = 10)
-        => Enumerable
-            .Range(0, length)
-            .Select(_=> GetValidGenre())
-            .ToList();
-
+    
 }
 
 
