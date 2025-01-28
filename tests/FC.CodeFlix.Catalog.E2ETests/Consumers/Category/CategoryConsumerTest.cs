@@ -18,7 +18,7 @@ public class CategoryConsumerTest : IDisposable
 
 
     [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsCreate_SavesCategory))]
-    [Trait("E2E/GraphQL", "Category")]
+    [Trait("E2E/Consumer", "Category")]
     public async Task CategoryEvent_WhenOperationIsCreate_SavesCategory()
     {
         var message = _fixture.BuildValidMessage("c");
@@ -44,7 +44,7 @@ public class CategoryConsumerTest : IDisposable
     }
 
     [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsUpdate_SavesCategory))]
-    [Trait("E2E/GraphQL", "Category")]
+    [Trait("E2E/Consumer", "Category")]
     public async Task CategoryEvent_WhenOperationIsUpdate_SavesCategory()
     {
         var examplesList = _fixture.GetCategoryModelList();
@@ -79,7 +79,7 @@ public class CategoryConsumerTest : IDisposable
     }
 
     [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsDelete_DeleteCategory))]
-    [Trait("E2E/GraphQL", "Category")]
+    [Trait("E2E/Consumer", "Category")]
     public async Task CategoryEvent_WhenOperationIsDelete_DeleteCategory()
     {
         var examplesList = _fixture.GetCategoryModelList();
@@ -103,7 +103,7 @@ public class CategoryConsumerTest : IDisposable
 
 
     [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsRead_SavesCategory))]
-    [Trait("E2E/GraphQL", "Category")]
+    [Trait("E2E/Consumer", "Category")]
     public async Task CategoryEvent_WhenOperationIsRead_SavesCategory()
     {
         var message = _fixture.BuildValidMessage("r");

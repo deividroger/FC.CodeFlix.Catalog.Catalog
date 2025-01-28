@@ -23,7 +23,7 @@ public class CategoryConsumerTestFixture : CategoryTestFixtureBase
 
     public async Task PublishMessageAsync(object message)
     {
-        var config = new ProducerConfig { BootstrapServers = _kafkaConfiguration.BoostrapServers };
+        var config = new ProducerConfig { BootstrapServers = _kafkaConfiguration.CategoryConsumer.BoostrapServers };
 
         using var producer = new ProducerBuilder<string, string>(config).Build();
 
