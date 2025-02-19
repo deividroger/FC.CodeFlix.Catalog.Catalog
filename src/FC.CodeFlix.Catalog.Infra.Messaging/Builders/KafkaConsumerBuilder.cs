@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace FC.CodeFlix.Catalog.Infra.Messaging.Builders;
 
@@ -38,6 +39,16 @@ public class KafkaConsumerBuilder<TMessage>
         return mappingBuilder;
     }
 
+    public KafkaConsumerBuilder<TMessage> WithDefault<THandler>()
+        where THandler : IMessageHandler<TMessage>
+    {
+        var mappingBuilder = new MessageHandlerMappingBuilder<TMessage>(this)
+              .WithDefault<THandler>();
+
+        _handlerMapping.Add(mappingBuilder);
+        return this;
+    }
+
     public KafkaConsumer<TMessage> Build(IServiceProvider provider, KafkaConsumerConfiguration configuration)
     {
         var looger = provider.GetRequiredService<ILogger<KafkaConsumer<TMessage>>>();
@@ -52,7 +63,6 @@ public class KafkaConsumerBuilder<TMessage>
 
         return consumer;
     }
-
 
     public IServiceCollection Register()
     {

@@ -1,5 +1,4 @@
-﻿using FC.CodeFlix.Catalog.E2ETests.Graphql.Categories.Common;
-using FC.CodeFlix.Catalog.Infra.ES.Models;
+﻿using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FluentAssertions;
 using Nest;
 
@@ -16,12 +15,13 @@ public class CategoryConsumerTest : IDisposable
         _fixture = fixture;
     }
 
-
-    [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsCreate_SavesCategory))]
+    [Theory(DisplayName = nameof(CategoryEvent_WhenOperationIsCreate_SavesCategory))]
     [Trait("E2E/Consumer", "Category")]
-    public async Task CategoryEvent_WhenOperationIsCreate_SavesCategory()
+    [InlineData("c")]
+    [InlineData("r")]
+    public async Task CategoryEvent_WhenOperationIsCreate_SavesCategory(string operation)
     {
-        var message = _fixture.BuildValidMessage("c");
+        var message = _fixture.BuildValidMessage(operation);
 
         var category = message.Payload.After;
 
@@ -98,33 +98,6 @@ public class CategoryConsumerTest : IDisposable
         var persisted = await _fixture.ElasticClient.GetAsync<CategoryModel>(category.Id);
 
         persisted.Found.Should().BeFalse();
-
-    }
-
-
-    [Fact(DisplayName = nameof(CategoryEvent_WhenOperationIsRead_SavesCategory))]
-    [Trait("E2E/Consumer", "Category")]
-    public async Task CategoryEvent_WhenOperationIsRead_SavesCategory()
-    {
-        var message = _fixture.BuildValidMessage("r");
-
-        var category = message.Payload.After;
-
-        await _fixture.PublishMessageAsync(message);
-        await Task.Delay(2_000);
-
-        var persisted = await _fixture.ElasticClient.GetAsync<CategoryModel>(category.Id);
-
-        persisted.Found.Should().BeTrue();
-
-        var document = persisted.Source;
-        document.Should().NotBeNull();
-
-        document.Id.Should().Be(category.Id);
-        document.Name.Should().Be(category.Name);
-        document.Description.Should().Be(category.Description);
-        document.IsActive.Should().Be(category.IsActive);
-        document.CreatedAt.Date.Should().Be(category.CreatedAt.Date);
 
     }
 

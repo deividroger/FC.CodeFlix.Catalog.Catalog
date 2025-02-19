@@ -33,11 +33,19 @@ public class MessageHandlerMappingBuilder<TMessage>
         return this;
     }
 
-    public (Func<MessageModel<TMessage>, bool> Predicate, Type Type ) Build()
+    public (Func<MessageModel<TMessage>, bool> Predicate, Type Type) Build()
     {
         return (_predicate, _handlerType);
     }
 
     public IServiceCollection Register() 
         => _kafkaConsumerBuilder.Register();
+
+    public MessageHandlerMappingBuilder<TMessage> WithDefault<THandler>()
+        where THandler : IMessageHandler<TMessage>
+    {
+        _handlerType = typeof(THandler);
+        _predicate = _ => true;
+        return this;
+    }
 }

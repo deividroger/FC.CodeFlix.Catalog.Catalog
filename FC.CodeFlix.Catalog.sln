@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kafka", "kafka", "{1759CA98
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Infra.Messaging", "src\FC.CodeFlix.Catalog.Infra.Messaging\FC.CodeFlix.Catalog.Infra.Messaging.csproj", "{700971AD-6485-4349-8C42-122DBA1E7195}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Infra.HttpClients", "src\FC.CodeFlix.Catalog.Infra.HttpClients\FC.CodeFlix.Catalog.Infra.HttpClients.csproj", "{A2715C92-30F6-4F16-99CE-3FA14679C3B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{700971AD-6485-4349-8C42-122DBA1E7195}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700971AD-6485-4349-8C42-122DBA1E7195}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{700971AD-6485-4349-8C42-122DBA1E7195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2715C92-30F6-4F16-99CE-3FA14679C3B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2715C92-30F6-4F16-99CE-3FA14679C3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2715C92-30F6-4F16-99CE-3FA14679C3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2715C92-30F6-4F16-99CE-3FA14679C3B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +104,7 @@ Global
 		{E9F303A7-B677-4F28-A0BD-98AB81786A33} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
 		{1759CA98-A2E0-4393-AA93-EA20DF611628} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
 		{700971AD-6485-4349-8C42-122DBA1E7195} = {61A00092-8D64-4828-B2BD-281A844F903A}
+		{A2715C92-30F6-4F16-99CE-3FA14679C3B2} = {61A00092-8D64-4828-B2BD-281A844F903A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11473A29-FF48-433F-BA75-9496B6067232}

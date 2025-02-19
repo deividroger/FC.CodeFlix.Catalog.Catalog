@@ -1,6 +1,7 @@
-﻿using Bogus;
-using FC.CodeFlix.Catalog.Application;
+﻿using FC.CodeFlix.Catalog.Application;
+using FC.CodeFlix.Catalog.Domain.Gateways;
 using FC.CodeFlix.Catalog.Infra.ES;
+using FC.CodeFlix.Catalog.Integration.Tests.Fakes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,9 +29,11 @@ public abstract class BaseFixture
             .AddInMemoryCollection(inMemorySerttings!)
             .Build();
 
-        services.AddUseCases();
-        services.AddElasticSearch(configuration);
-        services.AddRepositories();
+        services
+            .AddUseCases()
+            .AddElasticSearch(configuration)
+            .AddRepositories()
+            .AddSingleton<IAdminCatalogGateway, AdminCatalogFake>();
 
         return services.BuildServiceProvider();
     }

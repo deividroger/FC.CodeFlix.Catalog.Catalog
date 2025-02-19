@@ -2,7 +2,7 @@
 using FC.CodeFlix.Catalog.Infra.Messaging.Models;
 using MediatR;
 
-namespace FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers;
+namespace FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.Category;
 
 public class SaveCategoryMessageHandler : IMessageHandler<CategoryPayloadModel>
 {

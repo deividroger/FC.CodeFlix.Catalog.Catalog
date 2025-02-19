@@ -1,11 +1,9 @@
-﻿using Confluent.Kafka;
-using FC.CodeFlix.Catalog.E2ETests.Base.Fixture;
+﻿using FC.CodeFlix.Catalog.E2ETests.Base.Fixture;
 using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FC.CodeFlix.Catalog.Infra.Messaging.Configuration;
 using FC.CodeFlix.Catalog.Infra.Messaging.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
 
 namespace FC.CodeFlix.Catalog.E2ETests.Consumers.Category;
 
@@ -21,22 +19,8 @@ public class CategoryConsumerTestFixture : CategoryTestFixtureBase
         Thread.Sleep(15_000);
     }
 
-    public async Task PublishMessageAsync(object message)
-    {
-        var config = new ProducerConfig { BootstrapServers = _kafkaConfiguration.CategoryConsumer.BoostrapServers };
-
-        using var producer = new ProducerBuilder<string, string>(config).Build();
-
-        var rawMessage = JsonSerializer.Serialize(message, SerializerConfiguration.JsonSerializerOptions);
-
-        _ = await producer.ProduceAsync(
-                          _kafkaConfiguration.CategoryConsumer.Topic,
-                          new Message<string, string>
-                          {
-                              Key = Guid.NewGuid().ToString(),
-                              Value = rawMessage
-                          });
-    }
+    public Task PublishMessageAsync(object message)
+        => PublishMessageAsync(_kafkaConfiguration.CategoryConsumer, message);
 
     public MessageModel<CategoryPayloadModel> BuildValidMessage(string operation, CategoryModel categoryModel)
     {
@@ -72,7 +56,6 @@ public class CategoryConsumerTestFixture : CategoryTestFixtureBase
     public MessageModel<CategoryPayloadModel> BuildValidMessage(string operation)
         => BuildValidMessage(operation, DataGenerator.GetCategoryModelList(1)[0]);
 }
-
 
 [CollectionDefinition(nameof(CategoryConsumerTestFixture))]
 public class CategoryConsumerTestFixtureCollection

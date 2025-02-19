@@ -1,4 +1,5 @@
-﻿using FC.CodeFlix.Catalog.Domain.Repositories;
+﻿using FC.CodeFlix.Catalog.Domain.Gateways;
+using FC.CodeFlix.Catalog.Domain.Repositories;
 using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FC.CodeFlix.Catalog.Tests.Shared;
 using NSubstitute;
@@ -16,6 +17,9 @@ public class GenreUseCaseTestFixture
 
     public IGenreRepository GetMockRepository()
         => Substitute.For<IGenreRepository>();
+
+    public IAdminCatalogGateway GetMockAdminCatalogGateway()
+        => Substitute.For<IAdminCatalogGateway>();
 
     public DomainEntity.Genre GetValidGenre()
         => DataGenerator.GetValidGenre();

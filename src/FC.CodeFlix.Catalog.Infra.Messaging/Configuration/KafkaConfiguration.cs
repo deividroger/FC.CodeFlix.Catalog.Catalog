@@ -1,10 +1,4 @@
 ﻿using FC.CodeFlix.Catalog.Infra.Messaging.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FC.CodeFlix.Catalog.Infra.Messaging.Configuration;
 
@@ -12,6 +6,10 @@ public class KafkaConfiguration
 {
     
     public KafkaConsumerConfiguration CategoryConsumer { get; set; } = null!;
+
+    public KafkaConsumerConfiguration GenreConsumer { get; set; } = null!;
+
+    public KafkaConsumerConfiguration GenreCategoryConsumer { get; set; } = null!;
 
 }
 

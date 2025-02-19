@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FC.CodeFlix.Catalog.Application\FC.CodeFlix.Catalog.Application.csproj" />
     <ProjectReference Include="..\FC.CodeFlix.Catalog.Infra.ES\FC.CodeFlix.Catalog.Infra.ES.csproj" />
+    <ProjectReference Include="..\FC.CodeFlix.Catalog.Infra.HttpClients\FC.CodeFlix.Catalog.Infra.HttpClients.csproj" />
     <ProjectReference Include="..\FC.CodeFlix.Catalog.Infra.Messaging\FC.CodeFlix.Catalog.Infra.Messaging.csproj" />
   </ItemGroup>
 

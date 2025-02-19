@@ -4,9 +4,9 @@ using FC.CodeFlix.Catalog.Infra.Messaging.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers;
+namespace FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.Category;
 
-public class DeleteCategoryMessageHandler:  IMessageHandler<CategoryPayloadModel>
+public class DeleteCategoryMessageHandler : IMessageHandler<CategoryPayloadModel>
 {
     private readonly IMediator _mediator;
     private readonly ILogger<DeleteCategoryMessageHandler> _logger;

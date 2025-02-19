@@ -4,6 +4,7 @@ using FC.CodeFlix.Catalog.Api.Genres;
 using FC.CodeFlix.Catalog.Application;
 using FC.CodeFlix.Catalog.Infra.ES;
 using FC.CodeFlix.Catalog.Infra.Messaging;
+using FC.CodeFlix.Catalog.Infra.HttpClients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddUseCases()
+                .AddMemoryCache()
+                .AddHttpClients(builder.Configuration)
                 .AddConsumers(builder.Configuration)
                 .AddElasticSearch(builder.Configuration)
                 .AddRepositories();
