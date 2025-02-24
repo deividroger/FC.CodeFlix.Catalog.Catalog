@@ -16,7 +16,15 @@ public class DomainValidation
 
     public static void NotNullOrEmpty(Guid? target, string fieldName)
     {
-        if(target == null || target.Value == Guid.Empty)
+        if (target == null || target.Value == Guid.Empty)
             throw new EntityValidationException($"{fieldName} should not be empty or null");
+    }
+
+    public static void IdDefined<T>(T target, string fieldName)
+        where T : Enum
+    {
+        if (!Enum.IsDefined(typeof(T),target)){
+            throw new EntityValidationException($"{fieldName} is not a valid {typeof(T).Name}");
+        }
     }
 }
