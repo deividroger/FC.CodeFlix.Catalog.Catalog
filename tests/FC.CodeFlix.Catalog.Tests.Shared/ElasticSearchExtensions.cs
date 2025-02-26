@@ -74,6 +74,28 @@ public static class ElasticSearchExtensions
         );
     }
 
+    public static async Task CreateCastMemberIndexAsync(this IElasticClient elasticClient)
+    {
+        await elasticClient.DeleteIndexAsync(ElasticsearchIndices.CastMember);
+        _ = await elasticClient.Indices.CreateAsync(ElasticsearchIndices.CastMember, c => c
+            .Map<CastMemberModel>(m=> m
+            .Properties(ps=> ps
+                .Keyword (t => t
+                .Name(castMember => castMember.Id)
+                )
+                .Text(t => t
+                .Name(castMember => castMember.Name)
+                .Fields(fs => fs.Keyword(t => t.Name(castMember => castMember.Name.Suffix("keyword"))))
+                ).Number(t => t
+                .Name(castMember => castMember.Type)
+
+                ).
+                Date(t => t.Name(castMember => castMember.CreatedAt)
+            )
+            ))
+        );
+    }
+
     public static void DeleteDocuments<T>(this IElasticClient elasticClient)
         where T : class
     {
@@ -91,4 +113,8 @@ public static class ElasticSearchExtensions
     public static void DeleteGenreIndex(this IElasticClient elasticClient)
         => elasticClient.Indices
         .Delete(ElasticsearchIndices.Genre);
+
+    public static void DeleteCastMemberIndex(this IElasticClient elasticClient)
+        => elasticClient.Indices
+        .Delete(ElasticsearchIndices.CastMember);
 }

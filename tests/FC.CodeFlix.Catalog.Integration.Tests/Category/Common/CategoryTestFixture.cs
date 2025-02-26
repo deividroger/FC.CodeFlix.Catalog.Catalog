@@ -3,7 +3,6 @@ using FC.CodeFlix.Catalog.Integration.Tests.Common;
 using FC.CodeFlix.Catalog.Tests.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
-using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;
 namespace FC.CodeFlix.Catalog.Integration.Tests.Category.Common;
 
 public class CategoryTestFixure : BaseFixture, IDisposable
@@ -19,10 +18,7 @@ public class CategoryTestFixure : BaseFixture, IDisposable
 
         ElasticClient.CreateCategoryIndexAsync().GetAwaiter().GetResult();
     }
-    
-    public DomainEntity.Category GetValidCategory()
-        => DataGenerator.GetValidCategory();
-
+ 
     public IList<CategoryModel> GetCategoryModelList(int count = 10)
         => DataGenerator.GetCategoryModelList(count);
 
