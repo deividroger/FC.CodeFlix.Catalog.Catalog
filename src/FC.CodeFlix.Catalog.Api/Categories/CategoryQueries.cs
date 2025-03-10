@@ -9,7 +9,7 @@ public class CategoryQueries
 {
     public async Task<SearchCategoryPayload> GetCategoriesAsync(
         [Service] IMediator mediator,
-        int page = 1, 
+        int page = 1,
         int perPage = 10,
         string search = "",
         string sort = "",

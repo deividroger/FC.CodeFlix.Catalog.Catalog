@@ -15,7 +15,7 @@ public class FixtureBase
             .UsingPost();
     protected async Task PublishMessageAsync(KafkaConsumerConfiguration configuration, object message)
     {
-        var config = new ProducerConfig { BootstrapServers = configuration.BoostrapServers };
+        var config = new ProducerConfig { BootstrapServers = configuration.BootstrapServers };
 
         using var producer = new ProducerBuilder<string, string>(config).Build();
 

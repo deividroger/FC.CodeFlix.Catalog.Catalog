@@ -20,20 +20,21 @@ public class GenreQueries
     {
         var input = new SearchGenreInput(page, perPage, search, sort, direction);
 
-        var output = await mediator.Send(input,cancellationToken);
+        var output = await mediator.Send(input, cancellationToken);
 
         return SearchGenrePayload.FromSearchListOutput(output);
     }
 
     public async Task<GenrePayload?> GetGenreAsync(Guid id, IResolverContext context, [Service] IMediator mediator, CancellationToken cancellationToken)
     {
-        return await context.BatchDataLoader<Guid, GenrePayload >(async (keys, ct) => {
+        return await context.BatchDataLoader<Guid, GenrePayload>(async (keys, ct) =>
+        {
 
             var result = await mediator.Send(new GetGenresByIdsInput(keys), ct);
 
             return result.ToDictionary(x => x.Id, GenrePayload.FromGenreModelOutput);
 
-        }).LoadAsync(id, cancellationToken) ;
+        }).LoadAsync(id, cancellationToken);
 
     }
 }

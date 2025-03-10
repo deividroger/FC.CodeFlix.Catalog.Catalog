@@ -15,15 +15,15 @@ public class CategoryPayload
     public string Description { get; set; } = null!;
 
     public static CategoryPayload FromCategoryModelOutput(CategoryModelOutput category)
-    
+
         => new()
         {
-            Id = 
+            Id =
             category.Id,
             Name = category.Name,
-            Description = category.Description, 
-            CreatedAt =  category.CreatedAt,
-            IsActive =   category.IsActive
+            Description = category.Description,
+            CreatedAt = category.CreatedAt,
+            IsActive = category.IsActive
         };
-    
+
 }

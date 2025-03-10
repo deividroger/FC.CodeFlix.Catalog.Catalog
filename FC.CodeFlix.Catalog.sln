@@ -20,6 +20,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Api", "src\FC.CodeFlix.Catalog.Api\FC.CodeFlix.Catalog.Api.csproj", "{01735107-A2B7-4DDB-B3B1-3261D080EFC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sandbox", "sandbox", "{D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}"
+	ProjectSection(SolutionItems) = preProject
+		sandbox\start.sh = sandbox\start.sh
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.E2ETests", "tests\FC.CodeFlix.Catalog.E2ETests\FC.CodeFlix.Catalog.E2ETests.csproj", "{F4264667-B5F0-401D-A6D2-AEAAA75C9455}"
 EndProject
@@ -27,6 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.CodeFlix.Catalog.Tests.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "elk", "elk", "{E9F303A7-B677-4F28-A0BD-98AB81786A33}"
 	ProjectSection(SolutionItems) = preProject
+		sandbox\elk\cast_member_index.json = sandbox\elk\cast_member_index.json
 		sandbox\elk\category_index.json = sandbox\elk\category_index.json
 		sandbox\elk\docker-compose.yaml = sandbox\elk\docker-compose.yaml
 		genre_index.json = genre_index.json
@@ -41,6 +45,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Infra.Messaging", "src\FC.CodeFlix.Catalog.Infra.Messaging\FC.CodeFlix.Catalog.Infra.Messaging.csproj", "{700971AD-6485-4349-8C42-122DBA1E7195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.CodeFlix.Catalog.Infra.HttpClients", "src\FC.CodeFlix.Catalog.Infra.HttpClients\FC.CodeFlix.Catalog.Infra.HttpClients.csproj", "{A2715C92-30F6-4F16-99CE-3FA14679C3B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "certificates", "certificates", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		sandbox\certificates\fc.codeflix.catalog.pfx = sandbox\certificates\fc.codeflix.catalog.pfx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +114,7 @@ Global
 		{1759CA98-A2E0-4393-AA93-EA20DF611628} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
 		{700971AD-6485-4349-8C42-122DBA1E7195} = {61A00092-8D64-4828-B2BD-281A844F903A}
 		{A2715C92-30F6-4F16-99CE-3FA14679C3B2} = {61A00092-8D64-4828-B2BD-281A844F903A}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {D36A91FC-DA22-4CF0-8628-E8FFF5E527EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11473A29-FF48-433F-BA75-9496B6067232}

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <GraphQL Remove="Graphql\CastMembers\SearchCastMember\SearchCastMember.graphql" />
     <GraphQL Remove="Graphql\Categories\DeleteCategory\DeleteCategory.graphql" />
     <GraphQL Remove="Graphql\Categories\SaveCategory\SaveCategory.graphql" />
     <GraphQL Remove="Graphql\Categories\SearchCategory\SearchCategory.graphql" />
@@ -43,6 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Graphql\CastMembers\SearchCastMember\SearchCastMember.graphql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphql\Categories\SaveCategory\SaveCategory.graphql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

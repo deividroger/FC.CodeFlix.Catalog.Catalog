@@ -1,10 +1,11 @@
+using FC.CodeFlix.Catalog.Api.CastMembers;
 using FC.CodeFlix.Catalog.Api.Categories;
 using FC.CodeFlix.Catalog.Api.Filters;
 using FC.CodeFlix.Catalog.Api.Genres;
 using FC.CodeFlix.Catalog.Application;
 using FC.CodeFlix.Catalog.Infra.ES;
-using FC.CodeFlix.Catalog.Infra.Messaging;
 using FC.CodeFlix.Catalog.Infra.HttpClients;
+using FC.CodeFlix.Catalog.Infra.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,9 +28,10 @@ builder.Services.AddGraphQLServer()
                 .AddMutationType()
                 .AddTypeExtension<CategoryQueries>()
                 .AddTypeExtension<GenreQueries>()
+                .AddTypeExtension<CastMemberQueries>()
                 .AddTypeExtension<CategoriesMutations>()
                 .AddErrorFilter<GraphQLErrorFilter>();
-                
+
 
 var app = builder.Build();
 

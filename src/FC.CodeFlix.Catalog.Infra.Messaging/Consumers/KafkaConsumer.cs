@@ -32,7 +32,7 @@ public class KafkaConsumer<TMessage> : BackgroundService
     private ProducerConfig GetProducerConfig()
        => new()
        {
-           BootstrapServers = _configuration.BoostrapServers,
+           BootstrapServers = _configuration.BootstrapServers,
            Acks = Acks.All
 
        };
@@ -40,7 +40,7 @@ public class KafkaConsumer<TMessage> : BackgroundService
     private ConsumerConfig GetConsumerConfig()
         => new()
         {
-            BootstrapServers = _configuration.BoostrapServers,
+            BootstrapServers = _configuration.BootstrapServers,
             GroupId = _configuration.GroupId,
             AutoOffsetReset = AutoOffsetReset.Earliest,
             EnableAutoCommit = true,
@@ -141,7 +141,7 @@ public class KafkaConsumer<TMessage> : BackgroundService
     {
         var kafkaAdminConfig = new AdminClientConfig()
         {
-            BootstrapServers = _configuration.BoostrapServers
+            BootstrapServers = _configuration.BootstrapServers
         };
 
         var topics = new[] { _configuration.Topic, _configuration.DlqTopic };

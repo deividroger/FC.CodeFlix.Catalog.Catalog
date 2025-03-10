@@ -15,7 +15,7 @@ public class KafkaConfiguration
 
 public class KafkaConsumerConfiguration
 {
-    public string BoostrapServers { get; set; } = null!;
+    public string BootstrapServers { get; set; } = null!;
     public string GroupId { get; set; } = null!;
     public string Topic { get; set; } = null!;
     public string? RetryTopic { get; set; }
@@ -28,7 +28,7 @@ public class KafkaConsumerConfiguration
     public KafkaConsumerConfiguration CreateRetryConfiguration(int retryIndex, bool hasNextRetry)
         => new()
         {
-            BoostrapServers = BoostrapServers,
+            BootstrapServers = BootstrapServers,
             GroupId = GroupId,
             Topic = Topic.ToRetryTopic(retryIndex),
             RetryTopic = !hasNextRetry ? null : Topic.ToRetryTopic(retryIndex + 1),

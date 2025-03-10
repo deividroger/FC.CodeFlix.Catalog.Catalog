@@ -5,6 +5,14 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Copiar o certificado para o contêiner
+COPY ../../sandbox/certificates/fc.codeflix.catalog.pfx /https/fc.codeflix.catalog.pfx
+
+# Definir as variáveis de ambiente para o Kestrel
+
+#ENV ASPNETCORE_Kestrel__Certificates__Default__Path="/https/fc.codeflix.catalog.pfx"
+#ENV ASPNETCORE_Kestrel__Certificates__Default__Password="q1w2e3r4"
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
@@ -19,6 +27,8 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./FC.CodeFlix.Catalog.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+RUN dotnet dev-certs https
+RUN dotnet dev-certs https --trust
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FC.CodeFlix.Catalog.Api.dll"]
