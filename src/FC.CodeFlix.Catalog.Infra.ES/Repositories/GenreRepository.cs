@@ -32,7 +32,7 @@ public class GenreRepository : IGenreRepository
     {
         var model = GenreModel.FromEntity(entity);
 
-        await _elasticClient.IndexDocumentAsync<GenreModel>(model, cancellationToken);
+        await _elasticClient.IndexDocumentAsync(model, cancellationToken);
     }
 
     public async Task<SearchOutput<Genre>> SearchAsync(SearchInput input, CancellationToken cancellationToken)

@@ -34,17 +34,18 @@ public class FixtureBase
 
     public void ConfigureGetTokenMock(WireMockServer mockServer)
     {
-        var authResponse = new AuthenticationResponseModel()
+        var authResponse = new AuthenticationResponseModel
         {
             AccessToken = "access_token.jwt",
             ExpiresInSeconds = 300
         };
-
-        var authResponseBody = JsonSerializer.Serialize(authResponse, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-
+        var authResponseBody =
+            JsonSerializer.Serialize(authResponse, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         mockServer.Given(_authRequestBuilderMock)
-            .RespondWith(Response.Create()
-            .WithStatusCode(200)
-            .WithBody(authResponseBody));
+            .RespondWith(
+                Response.Create()
+                    .WithStatusCode(200)
+                    .WithBody(authResponseBody));
+
     }
 }

@@ -24,7 +24,7 @@ internal class AuthenticationHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
 
-        if (!_cache.TryGetValue("token", out string? token))
+        if (!_cache.TryGetValue(CacheKey, out string? token))
         {
             var authResponse = await _authClient.GetAccessToken(_credentialsModel.Username, _credentialsModel.Password, cancellationToken);
             token = authResponse.AccessToken;

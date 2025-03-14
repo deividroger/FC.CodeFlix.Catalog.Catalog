@@ -5,7 +5,7 @@ public class DataWrapper<T>
 {
     public DataWrapper(T data)
     {
-        Data = Data;
+        Data = data;
     }
     public T Data { get; set; }
 }

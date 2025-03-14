@@ -11,6 +11,8 @@ public class KafkaConfiguration
 
     public KafkaConsumerConfiguration GenreCategoryConsumer { get; set; } = null!;
 
+    public KafkaConsumerConfiguration CastMemberConsumer { get; set; } = null!;
+
 }
 
 public class KafkaConsumerConfiguration

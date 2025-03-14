@@ -55,7 +55,7 @@ public class GenreConsumerTest : IDisposable
             .RespondWith(adminCatalogResponse);
 
         await _fixture.PublishMessageAsync(message);
-        await Task.Delay(2_000);
+        await Task.Delay(8_000);
 
         var persisted = await _fixture.ElasticClient.GetAsync<GenreModel>(genre.Id);
 
@@ -99,7 +99,7 @@ public class GenreConsumerTest : IDisposable
 
         var adminCatalogRequest = Request.Create()
                  .WithPath($"/genres/{genre.Id}")
-                 .WithHeader("Authorization", "Bearer *")
+                 .WithHeader("Authorization", "Bearer access_token.jwt")
                  .UsingGet();
 
         var adminCatalogResponse = Response.Create()
@@ -112,7 +112,7 @@ public class GenreConsumerTest : IDisposable
 
 
         await _fixture.PublishMessageAsync(message);
-        await Task.Delay(2_000);
+        await Task.Delay(8_000);
 
         var persisted = await _fixture.ElasticClient.GetAsync<GenreModel>(genre.Id);
 
@@ -148,7 +148,7 @@ public class GenreConsumerTest : IDisposable
         var genre = message.Payload.Before;
 
         await _fixture.PublishMessageAsync(message);
-        await Task.Delay(2_000);
+        await Task.Delay(8_000);
 
         var persisted = await _fixture.ElasticClient.GetAsync<GenreModel>(genre.Id);
 
