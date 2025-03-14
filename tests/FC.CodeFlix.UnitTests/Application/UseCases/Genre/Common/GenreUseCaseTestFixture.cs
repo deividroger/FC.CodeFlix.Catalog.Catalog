@@ -1,6 +1,5 @@
 ﻿using FC.CodeFlix.Catalog.Domain.Gateways;
 using FC.CodeFlix.Catalog.Domain.Repositories;
-using FC.CodeFlix.Catalog.Infra.ES.Models;
 using FC.CodeFlix.Catalog.Tests.Shared;
 using NSubstitute;
 using DomainEntity = FC.CodeFlix.Catalog.Domain.Entity;

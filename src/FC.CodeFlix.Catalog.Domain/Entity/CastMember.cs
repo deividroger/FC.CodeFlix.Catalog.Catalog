@@ -31,6 +31,6 @@ public class CastMember
     {
         DomainValidation.NotNullOrEmpty(Id, nameof(Id));
         DomainValidation.NotNullOrEmpty(Name, nameof(Name));
-        DomainValidation.IdDefined(Type, nameof(Type));
+        DomainValidation.IsDefined(Type, nameof(Type));
     }
 }
