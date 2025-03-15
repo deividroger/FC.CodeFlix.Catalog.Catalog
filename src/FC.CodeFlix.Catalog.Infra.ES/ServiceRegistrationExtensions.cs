@@ -27,6 +27,10 @@ public static class ServiceRegistrationExtensions
             .IndexName(ElasticsearchIndices.CastMember)
             .IdProperty(i => i.Id))
 
+            .DefaultMappingFor<VideoModel>(i => i
+            .IndexName(ElasticsearchIndices.Video)
+            .IdProperty(i => i.Id))
+
             //.EnableDebugMode()
             .PrettyJson()
             .ThrowExceptions()
@@ -43,6 +47,7 @@ public static class ServiceRegistrationExtensions
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IGenreRepository, GenreRepository>();
         services.AddScoped<ICastMemberRepository, CastMemberRepository>();
+        services.AddScoped<IVideoRepository, VideoRepository>();
 
         return services;
     }

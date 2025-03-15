@@ -4,7 +4,6 @@ using FC.CodeFlix.Catalog.Domain.Repositories;
 using FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
 using FC.CodeFlix.Catalog.Infra.ES.Models;
 using Nest;
-using System.Reflection.Metadata.Ecma335;
 using SearchInput = FC.CodeFlix.Catalog.Domain.Repositories.DTOs.SearchInput;
 
 namespace FC.CodeFlix.Catalog.Infra.ES.Repositories;

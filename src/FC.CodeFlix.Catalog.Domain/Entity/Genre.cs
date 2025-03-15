@@ -16,7 +16,11 @@ public class Genre
 
     public IReadOnlyCollection<Category> Categories
     => _categories.AsReadOnly();
+    public Genre(Guid id, string name)
+        : this(id, name, true, DateTime.Now, null)
+    {
 
+    }
     public Genre(Guid id, string name, bool isActive, DateTime createdAt, IEnumerable< Category> categories)
     {
         Id = id;
