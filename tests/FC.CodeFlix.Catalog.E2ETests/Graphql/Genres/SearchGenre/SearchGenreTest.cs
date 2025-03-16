@@ -7,11 +7,11 @@ using RespositoriesDTOs = FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
 namespace FC.CodeFlix.Catalog.E2ETests.Graphql.Genres.SearchGenre;
 
 [Collection(nameof(SearchGenreTestFixture))]
-public class SearchGenre: IDisposable
+public class SearchGenreTest: IDisposable
 {
     private readonly SearchGenreTestFixture _fixture;
 
-    public SearchGenre(SearchGenreTestFixture fixture)
+    public SearchGenreTest(SearchGenreTestFixture fixture)
     {
         _fixture = fixture;
     }

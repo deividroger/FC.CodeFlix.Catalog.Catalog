@@ -2,6 +2,7 @@ using FC.CodeFlix.Catalog.Api.CastMembers;
 using FC.CodeFlix.Catalog.Api.Categories;
 using FC.CodeFlix.Catalog.Api.Filters;
 using FC.CodeFlix.Catalog.Api.Genres;
+using FC.CodeFlix.Catalog.Api.Videos;
 using FC.CodeFlix.Catalog.Application;
 using FC.CodeFlix.Catalog.Infra.ES;
 using FC.CodeFlix.Catalog.Infra.HttpClients;
@@ -29,6 +30,7 @@ builder.Services.AddGraphQLServer()
                 .AddTypeExtension<CategoryQueries>()
                 .AddTypeExtension<GenreQueries>()
                 .AddTypeExtension<CastMemberQueries>()
+                .AddTypeExtension<VideoQueries>()
                 .AddTypeExtension<CategoriesMutations>()
                 .AddErrorFilter<GraphQLErrorFilter>();
 
