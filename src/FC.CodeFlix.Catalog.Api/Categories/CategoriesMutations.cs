@@ -1,10 +1,12 @@
 ﻿using FC.CodeFlix.Catalog.Application.UseCases.Category.DeleteCategory;
 using FC.CodeFlix.Catalog.Application.UseCases.Category.SaveCategory;
+using HotChocolate.Authorization;
 using MediatR;
 
 namespace FC.CodeFlix.Catalog.Api.Categories;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
+[Authorize(Roles = new[] { "catalog_admin" })]
 public class CategoriesMutations
 {
     public async Task<CategoryPayload> SaveCategoryAsync(SaveCategoryInput input, [Service] IMediator mediator, CancellationToken cancellation)

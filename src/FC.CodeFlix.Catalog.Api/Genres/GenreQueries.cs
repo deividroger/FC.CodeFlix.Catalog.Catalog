@@ -1,6 +1,7 @@
 ﻿using FC.CodeFlix.Catalog.Application.UseCases.Genre.GetGenresByIds;
 using FC.CodeFlix.Catalog.Application.UseCases.Genre.SearchGenre;
 using FC.CodeFlix.Catalog.Domain.Repositories.DTOs;
+using HotChocolate.Authorization;
 using HotChocolate.Resolvers;
 using MediatR;
 
