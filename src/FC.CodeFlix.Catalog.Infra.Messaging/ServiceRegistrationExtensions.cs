@@ -2,6 +2,7 @@
 using FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.CastMember;
 using FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.Category;
 using FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.Genre;
+using FC.CodeFlix.Catalog.Infra.Messaging.Consumers.MessageHandlers.Video;
 using FC.CodeFlix.Catalog.Infra.Messaging.Extensions;
 using FC.CodeFlix.Catalog.Infra.Messaging.Models;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +26,8 @@ public static class ServiceRegistrationExtensions
             .AddGenreConsumers(
                 kafkaConfiguration.GetSection(nameof(KafkaConfiguration.GenreConsumer)),
                 kafkaConfiguration.GetSection(nameof(KafkaConfiguration.GenreCategoryConsumer)))
-            .AddCastMemberConsumers(kafkaConfiguration.GetSection(nameof(KafkaConfiguration.CastMemberConsumer)));
+            .AddCastMemberConsumers(kafkaConfiguration.GetSection(nameof(KafkaConfiguration.CastMemberConsumer)))
+            .AddVideoConsumers(kafkaConfiguration.GetSection(nameof(KafkaConfiguration.VideoConsumer)));
     }
     private static IServiceCollection AddCategoryConsumers(
         this IServiceCollection services,
@@ -92,7 +94,27 @@ public static class ServiceRegistrationExtensions
                     .With<DeleteCastMemberMessageHandler>()
                     .When(message => message.Payload.Operation is MessageModelOperation.Delete)
                .Register();
-
-
     }
+
+    private static IServiceCollection AddVideoConsumers(
+       this IServiceCollection services,
+       IConfigurationSection configurationSection)
+    {
+        return services
+            .AddScoped<SaveVideoMessageHandler>()
+            .AddScoped<DeleteVideoMessageHandler>()
+            .AddKafkaConsumer<VideoPayloadModel>()
+            .Configure(configurationSection)
+            .WithRetries()
+            .With<SaveVideoMessageHandler>()
+            .When(message => message.Payload.Operation is
+                MessageModelOperation.Create or
+                MessageModelOperation.Read or
+                MessageModelOperation.Update)
+            .And
+            .With<DeleteVideoMessageHandler>()
+            .When(message => message.Payload.Operation is MessageModelOperation.Delete)
+            .Register();
+    }
+
 }

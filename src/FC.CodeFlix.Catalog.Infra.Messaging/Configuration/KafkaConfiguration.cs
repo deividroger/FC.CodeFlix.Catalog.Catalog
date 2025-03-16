@@ -13,6 +13,8 @@ public class KafkaConfiguration
 
     public KafkaConsumerConfiguration CastMemberConsumer { get; set; } = null!;
 
+    public KafkaConsumerConfiguration VideoConsumer { get; set; } = null!;
+
 }
 
 public class KafkaConsumerConfiguration

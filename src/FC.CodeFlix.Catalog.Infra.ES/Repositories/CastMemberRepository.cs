@@ -55,6 +55,20 @@ public class CastMemberRepository : ICastMemberRepository
 
     }
 
+    public async Task<IEnumerable<CastMember>> GetCastMembersByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+    {
+        var response = await _client.SearchAsync<CastMemberModel>(s => s
+            .Query(q => q
+              .Bool(b => b
+                .Filter(f => f
+
+                    .Ids(i => i.Values(ids))
+                )
+                )), cancellationToken);
+
+        return response.Documents.Select(doc => doc.ToEntity()).ToList();
+    }
+
     private static Func<SortDescriptor<CastMemberModel>, IPromise<IList<ISort>>> BuildSortExpression(string orderBy, SearchOrder order)
     => (orderBy.ToLower(), order)
         switch
@@ -80,4 +94,6 @@ public class CastMemberRepository : ICastMemberRepository
              .Ascending(f => f.Name.Suffix("keyword"))
              .Ascending(f => f.Id)
     };
+
+   
 }
