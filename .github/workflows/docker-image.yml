@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: fc3-api-catalogo-de-videos-c-sharp
+  IMAGE_NAME: fc.codeflix.catalog.csharp
 
 jobs:
   tests:
@@ -87,7 +87,7 @@ jobs:
     - name: Log in to DockerHub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_HUB_USER }}
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Build and push Docker images
@@ -96,4 +96,4 @@ jobs:
         context: .
         file: ./src/FC.CodeFlix.Catalog.Api/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USER}}/${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }},${{ secrets.DOCKER_HUB_USER}}/${{ env.IMAGE_NAME }}:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME}}/${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }},${{ secrets.DOCKER_HUB_USERNAME}}/${{ env.IMAGE_NAME }}:latest
