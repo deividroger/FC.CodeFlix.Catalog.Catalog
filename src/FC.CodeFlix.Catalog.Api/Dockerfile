@@ -27,8 +27,8 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./FC.CodeFlix.Catalog.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
-RUN dotnet dev-certs https
-RUN dotnet dev-certs https --trust
+#RUN dotnet dev-certs https
+#RUN dotnet dev-certs https --trust
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FC.CodeFlix.Catalog.Api.dll"]
