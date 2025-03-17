@@ -6,7 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 # Copiar o certificado para o contêiner
-COPY ../../sandbox/certificates/fc.codeflix.catalog.pfx /https/fc.codeflix.catalog.pfx
+#COPY ../../sandbox/certificates/fc.codeflix.catalog.pfx /https/fc.codeflix.catalog.pfx
 
 # Definir as variáveis de ambiente para o Kestrel
 
